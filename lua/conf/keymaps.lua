@@ -149,3 +149,14 @@ vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
 -- Open Undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Open Undotree" })
 
+
+-- ray-x/go.nvim
+vim.keymap.set("n", "<leader>tt", "<cmd>GoTest<CR>")
+vim.keymap.set("n", "<leader>tf", "<cmd>GoTestFunc<CR>")
+vim.keymap.set("n", "<leader>tr", "<cmd>GoRun<CR>")
+vim.keymap.set("n", "<leader>tb", "<cmd>GoBuild<CR>")
+vim.keymap.set("n", "<leader>ti", "<cmd>GoImports<CR>")
+vim.keymap.set("n", "<leader>ta", "<cmd>GoAlt<CR>")
+
+
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "Open Nvim Tree"  })
