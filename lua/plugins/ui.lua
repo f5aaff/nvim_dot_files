@@ -3,6 +3,7 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    lazy = false,
     priority = 1000,
     config = function()
       vim.cmd.colorscheme("catppuccin")
@@ -11,11 +12,15 @@ return {
 
   {
     "nvim-lualine/lualine.nvim",
+    lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
-
-    opts = {
-      options = { theme = "catppuccin" },
-    },
+    config = function()
+    require("lualine").setup({
+      options = {
+        theme = require("catppuccin.utils.lualine")(),
+      },
+    })
+    end,
   },
 
   {

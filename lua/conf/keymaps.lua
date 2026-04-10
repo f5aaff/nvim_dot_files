@@ -1,4 +1,3 @@
-vim.g.mapleader = ","  -- Set leader key to comma
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open netrw file explorer" })  -- Open netrw file explorer
 
 -- Visual mode line movement
@@ -46,8 +45,7 @@ vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>", { d
 vim.keymap.set("n", "<leader><leader>","<cmd>Telescope<CR>", { desc = "Open Telescope" })  -- Open Telescope
 
 -- LSP & Diagnostic stuff
-vim.api.nvim_set_keymap('n', '<leader>ff', ':lua vim.lsp.buf.format()<CR>:retab<CR>', { noremap = true, silent = true })  -- Format and retab current file
-vim.keymap.set('n', '<leader>ff', function()
+vim.keymap.set('n', '<leader>ff', function() -- Format and retab current file
   vim.lsp.buf.format()
   vim.cmd('retab')
 end, { silent = true, desc = "format buffer then retab"} )

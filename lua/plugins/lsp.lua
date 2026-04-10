@@ -56,7 +56,7 @@ return {
       -- keymaps
       -------------------------------------------------
 
-      local on_attach = function(_, bufnr)
+      local on_attach = function(client, bufnr)
         local opts = { buffer = bufnr }
 
         vim.keymap.set("n", "<leader>gws", vim.lsp.buf.workspace_symbol, opts)
