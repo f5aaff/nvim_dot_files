@@ -70,6 +70,13 @@ return {
         vim.keymap.set("n", "<leader>D", vim.lsp.buf.declaration, opts)
         vim.keymap.set("n", "<leader>ds", vim.lsp.buf.document_symbol, opts)
         vim.keymap.set("n", "<leader>ws", vim.lsp.buf.workspace_symbol, opts)
+
+
+         if client.name == "pyright" then
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+        end
+
       end
 
       -------------------------------------------------
@@ -93,25 +100,16 @@ return {
         on_attach = on_attach,
       })
 
-      vim.lsp.config("pylsp", {
+      vim.lsp.config("pyright", {
         capabilities = capabilities,
         on_attach = on_attach,
-        settings = {
-          pylsp = {
-            plugins = {
-              pycodestyle = { enabled = false },
-              pyflakes = { enabled = false },
-              mccabe = { enabled = false },
-              autopep8 = { enabled = false },
-              yapf = { enabled = false },
-              pylint = { enabled = false },
-
-              rope_completion = { enabled = true },
-              jedi = { enabled = true },
-            },
-          },
-        },
       })
+
+      vim.lsp.config("ruff", {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+
 
       -------------------------------------------------
       -- enable servers
@@ -119,8 +117,8 @@ return {
 
       vim.lsp.enable("lua_ls")
       vim.lsp.enable("gopls")
-      vim.lsp.enable("pylsp")
-
+      vim.lsp.enable("pyright")
+      vim.lsp.enable("ruff")
     end,
   },
 
