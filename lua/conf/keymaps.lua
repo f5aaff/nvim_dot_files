@@ -147,6 +147,18 @@ vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
 -- Open Undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Open Undotree" })
 
+-- open markdown docs in zathura, with live updates
+-- Neovim
+--   ↓
+-- Pandoc
+--   ↓
+--  PDF
+--   ↓
+-- Zathura (auto-reload)
+vim.keymap.set("n", "<leader>mp", function()
+  vim.fn.jobstart({ "pandoc", vim.fn.expand("%"), "-o", "/tmp/mdpreview.pdf" })
+  vim.fn.jobstart({ "zathura", "/tmp/mdpreview.pdf" }, { detach = true })
+end, { desc = "Markdown preview in zathura" })
 
 -- ray-x/go.nvim
 vim.keymap.set("n", "<leader>tt", "<cmd>GoTest<CR>")
