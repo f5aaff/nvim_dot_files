@@ -1,25 +1,21 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
 
-    opts = {
-      ensure_installed = {
+    config = function()
+      require("nvim-treesitter").setup({
+        install_dir = vim.fn.stdpath("data") .. "/site",
+      })
+
+      require("nvim-treesitter").install({
         "lua",
         "go",
         "python",
         "bash",
         "json",
-      },
-
-      highlight = {
-        enable = true,
-      },
-
-      indent = {
-        enable = true,
-      },
-    },
+      })
+    end,
   },
 }

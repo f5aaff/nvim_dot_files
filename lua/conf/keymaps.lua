@@ -156,9 +156,29 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Open Undotree
 --   ↓
 -- Zathura (auto-reload)
 vim.keymap.set("n", "<leader>mp", function()
-  vim.fn.jobstart({ "pandoc", vim.fn.expand("%"), "-o", "/tmp/mdpreview.pdf" })
-  vim.fn.jobstart({ "zathura", "/tmp/mdpreview.pdf" }, { detach = true })
-end, { desc = "Markdown preview in zathura" })
+  vim.cmd("write")  -- ensure file is saved
+
+  local input = vim.fn.expand("%:p")
+  local output = vim.fn.expand("%:p:r") .. ".pdf"
+
+  vim.fn.jobstart({
+    "pandoc",
+    input,
+    "-o",
+    output,
+    "--pdf-engine=xelatex",
+  }, {
+    stdout_buffered = true,
+    stderr_buffered = true,
+    on_exit = function(_, code)
+      if code == 0 then
+        vim.fn.jobstart({ "zathura", output }, { detach = true })
+      else
+        vim.notify("Pandoc build failed", vim.log.levels.ERROR)
+      end
+    end,
+  })
+end, { desc = "Markdown preview" })
 
 -- ray-x/go.nvim
 vim.keymap.set("n", "<leader>tt", "<cmd>GoTest<CR>")

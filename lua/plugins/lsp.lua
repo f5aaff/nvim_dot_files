@@ -6,7 +6,7 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    lazy = false,
 
     dependencies = {
       "hrsh7th/nvim-cmp",
@@ -15,21 +15,35 @@ return {
 
     config = function()
 
-      local cmp = require("cmp")
+        local cmp = require("cmp")
 
-      cmp.setup({
-        mapping = {
-          ["<C-p>"] = cmp.mapping.select_prev_item(),
-          ["<C-n>"] = cmp.mapping.select_next_item(),
-          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-          ["<C-Space>"] = cmp.mapping.complete(),
-        },
+        cmp.setup({
+          mapping = {
+            ["<Tab>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item()
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
 
-        sources = {
-          { name = "nvim_lsp" },
-        },
-      })
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item()
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
 
+            ["<S-CR>"] = cmp.mapping.confirm({ select = false }),
+
+            ["<C-Space>"] = cmp.mapping.complete(),
+          },
+
+          sources = {
+            { name = "nvim_lsp" },
+          },
+        })
       -------------------------------------------------
       -- capabilities
       -------------------------------------------------
