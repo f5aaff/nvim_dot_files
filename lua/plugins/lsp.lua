@@ -73,6 +73,10 @@ return {
       local on_attach = function(client, bufnr)
         local opts = { buffer = bufnr }
 
+        --if client.server_capabilities.semanticTokensProvider then
+        --  vim.lsp.semantic_tokens.start(bufnr, client.id)
+        --end
+
         vim.keymap.set("n", "<leader>gws", vim.lsp.buf.workspace_symbol, opts)
         vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
         vim.keymap.set("n", "<leader>gca", vim.lsp.buf.code_action, opts)
@@ -112,6 +116,11 @@ return {
       vim.lsp.config("gopls", {
         capabilities = capabilities,
         on_attach = on_attach,
+        settings = {
+          gopls = {
+            semanticTokens = true,
+          },
+        },
       })
 
       vim.lsp.config("pyright", {
@@ -135,5 +144,16 @@ return {
       vim.lsp.enable("ruff")
     end,
   },
+  vim.api.nvim_create_user_command("LspRestart", function()
+    for _, client in pairs(vim.lsp.get_clients()) do
+      client:stop()
+    end
+    vim.cmd("edit")
+  end, {}),
 
+  vim.api.nvim_create_user_command("LspStop", function()
+    for _, client in pairs(vim.lsp.get_clients()) do
+      client:stop()
+    end
+  end, {}),
 }

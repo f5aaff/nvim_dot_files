@@ -52,5 +52,6 @@ vim.api.nvim_create_autocmd("FileType", {
     if not ok then
       -- silently ignore unsupported filetypes
     end
+    vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
