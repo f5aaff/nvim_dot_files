@@ -64,14 +64,12 @@ vim.keymap.set("n", "<leader>gt", '<cmd>tabnew<CR>', { desc = "Open new tab" }) 
 vim.keymap.set("n", "<leader>hls", "<cmd>set hlsearch!<CR>", { desc = "Toggle search highlighting" })  -- Toggle search highlighting
 
 -- Harpoon keymaps
-local mark = require("harpoon.mark")  -- For marking files
-local ui = require("harpoon.ui")      -- For UI and navigation
-vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Add current file to Harpoon list" })  -- Add current file to harpoon list
-vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, { desc = "Show list of marked files" })  -- Show list of marked files
-vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end, { desc = "Navigate to first marked file" })  -- Navigate to first marked file
-vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end, { desc = "Navigate to second marked file" })  -- Navigate to second marked file
-vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end, { desc = "Navigate to third marked file" })  -- Navigate to third marked file
-vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc = "Navigate to fourth marked file" })  -- Navigate to fourth marked file
+vim.keymap.set("n", "<leader>a", function() require("harpoon.mark").add_file() end, { desc = "Add current file to Harpoon list" })  -- Add current file to harpoon list
+vim.keymap.set("n", "<C-e>", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "Show list of marked files" })  -- Show list of marked files
+vim.keymap.set("n", "<C-h>", function() require("ui").nav_file(1) end, { desc = "Navigate to first marked file" })  -- Navigate to first marked file
+vim.keymap.set("n", "<C-t>", function() require("ui").nav_file(2) end, { desc = "Navigate to second marked file" })  -- Navigate to second marked file
+vim.keymap.set("n", "<C-n>", function() require("ui").nav_file(3) end, { desc = "Navigate to third marked file" })  -- Navigate to third marked file
+vim.keymap.set("n", "<C-s>", function() require("ui").nav_file(4) end, { desc = "Navigate to fourth marked file" })  -- Navigate to fourth marked file
 
 -- Telescope keymaps
 
@@ -120,9 +118,9 @@ autocmd("BufWinEnter", {
 
 
 -- refactoring keymaps
-require('refactoring').setup({})
-
-vim.api.nvim_set_keymap("v", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true})
+--require('refactoring').setup({})
+--
+--vim.api.nvim_set_keymap("v", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true})
 
 
 -- QoL
