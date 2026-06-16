@@ -25,25 +25,25 @@ autocmd({"BufWritePre"}, {
     command = [[%s/\s\+$//e]],
 })
 
--- Markdown → PDF rebuild
-autocmd("BufWritePost", {
-    group = TheStolenGoodsGroup,
-    pattern = "*.md",
-    callback = function()
-        local input = vim.fn.expand("%:p")
-        if input == "" then return end
-
-        local output = vim.fn.expand("%:p:r") .. ".pdf"
-
-        vim.fn.jobstart({
-            "pandoc",
-            input,
-            "-o",
-            output,
-            "--pdf-engine=tectonic",
-        })
-    end,
-})
+---- Markdown → PDF rebuild
+--autocmd("BufWritePost", {
+--    group = TheStolenGoodsGroup,
+--    pattern = "*.md",
+--    callback = function()
+--        local input = vim.fn.expand("%:p")
+--        if input == "" then return end
+--
+--        local output = vim.fn.expand("%:p:r") .. ".pdf"
+--
+--        vim.fn.jobstart({
+--            "pandoc",
+--            input,
+--            "-o",
+--            output,
+--            "--pdf-engine=tectonic",
+--        })
+--    end,
+--})
 
 -- Tree sitter gubbins
 vim.api.nvim_create_autocmd("FileType", {
