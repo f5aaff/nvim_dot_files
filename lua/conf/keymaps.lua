@@ -32,7 +32,7 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Previous location
 
 vim.keymap.set("n","<leader>B",":b#<CR>", { desc = "Switch to last buffer" })  -- Switch to last buffer
 
-vim.keymap.set("n","<leader>ob",":OldfilesBrowser<CR>", { desc = "Open old files browser" })  -- Open old files browser
+vim.keymap.set("n","<leader>ofb",":OldfilesBrowser<CR>", { desc = "Open old files browser" })  -- Open old files browser
 
 -- Search and replace
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word under cursor" })  -- Replace word under cursor
@@ -186,5 +186,7 @@ vim.keymap.set("n", "<leader>tb", "<cmd>GoBuild<CR>")
 vim.keymap.set("n", "<leader>ti", "<cmd>GoImports<CR>")
 vim.keymap.set("n", "<leader>ta", "<cmd>GoAlt<CR>")
 
-
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "Open Nvim Tree"  })
+-- Neotree
+vim.keymap.set("n", "<leader>e", "<cmd>Neotree left filesystem<cr>", { desc = "Open Neotree filesystem" })
+vim.keymap.set("n", "<leader>ob", "<cmd>Neotree top buffers<cr>", { desc = "Open Neotree buffers" })
+vim.keymap.set("n", "<leader>ogs", "<cmd>Neotree right git_status<cr>", { desc = "Open Neotree git_status" })
