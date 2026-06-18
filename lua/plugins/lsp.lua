@@ -136,6 +136,21 @@ return {
                 on_attach = on_attach,
             })
 
+            vim.lsp.config("ltex", {
+                filetypes = { "markdown" },
+                on_attach = on_attach,
+                settings = {
+                    ltex = {
+                        language = "en-GB",
+                        disabledRules = {
+                            ["en-GB"] = {
+                                "OXFORD_SPELLING_Z_NOT_S",
+                            },
+                        },
+                    },
+                },
+            })
+
             -------------------------------------------------
             -- enable servers
             -------------------------------------------------
@@ -145,6 +160,7 @@ return {
             vim.lsp.enable("pyright")
             vim.lsp.enable("ruff")
             vim.lsp.enable("marksman")
+            vim.lsp.enable("ltex")
         end,
     },
     vim.api.nvim_create_user_command("LspRestart", function()
