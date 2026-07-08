@@ -10,6 +10,8 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down with cursor cen
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up with cursor centered" })     -- Half page up with cursor centered
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result with cursor centered" })     -- Next search result with cursor centered
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result with cursor centered" }) -- Previous search result with cursor centered
+vim.keymap.set("n", "<leader>N", "<cmd>e $NOTES_HOME", { desc = "Open Notes Home" })        -- Open $NOTES_HOME
+
 
 -- Paste without yanking
 vim.keymap.set("x", "<leader>p", [['_dP]], { desc = "Paste over selection without yanking" }) -- Paste over selection without yanking
@@ -25,32 +27,32 @@ vim.keymap.set("n", "Q", "<nop>", { desc = "Disable Ex mode" })                 
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Open tmux sessionizer" }) -- Open tmux sessionizer
 
 -- Quickfix and location list navigation
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix item" })              -- Next quickfix item
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix item" })          -- Previous quickfix item
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location list item" })     -- Next location list item
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Previous location list item" }) -- Previous location list item
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix item" })               -- Next quickfix item
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix item" })           -- Previous quickfix item
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location list item" })      -- Next location list item
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Previous location list item" })  -- Previous location list item
 
-vim.keymap.set("n", "<leader>B", ":b#<CR>", { desc = "Switch to last buffer" })                -- Switch to last buffer
+vim.keymap.set("n", "<leader>B", ":b#<CR>", { desc = "Switch to last buffer" })                 -- Switch to last buffer
 
 vim.keymap.set("n", "<leader>ofb", ":OldfilesBrowser<CR>", { desc = "Open old files browser" }) -- Open old files browser
 
 -- Search and replace
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-    { desc = "Replace word under cursor" })                                                                                      -- Replace word under cursor
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make current file executable" })               -- Make current file executable
+    { desc = "Replace word under cursor" })                                                                        -- Replace word under cursor
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make current file executable" }) -- Make current file executable
 
-vim.keymap.set("n", "<leader>vpp", "<cmd>Explore ~.config/nvim/<CR>", { desc = "Open nvim config folder" })                      -- Open nvim config folder
+vim.keymap.set("n", "<leader>vpp", "<cmd>Explore ~.config/nvim/<CR>", { desc = "Open nvim config folder" })        -- Open nvim config folder
 
-vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope<CR>", { desc = "Open Telescope" })                                       -- Open Telescope
+vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope<CR>", { desc = "Open Telescope" })                         -- Open Telescope
 
 -- LSP & Diagnostic stuff
 vim.keymap.set('n', '<leader>ff', function() -- Format and retab current file
     vim.lsp.buf.format()
     vim.cmd('retab')
 end, { silent = true, desc = "format buffer then retab" })
-vim.keymap.set("n", "<leader>gh", vim.lsp.buf.hover, { desc = "Show LSP hover information" })        -- Show LSP hover information
+vim.keymap.set("n", "<leader>gh", vim.lsp.buf.hover, { desc = "Show LSP hover information" })          -- Show LSP hover information
 vim.keymap.set("n", "<leader>gl", vim.diagnostic.open_float, { desc = "Show diagnostic information" }) -- show diagnostic information
-vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Jump to definition" })           -- jump to definition
+vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Jump to definition" })             -- jump to definition
 
 -- Telescope commands
 vim.keymap.set("n", "<leader><space>fb", "<cmd>Telescope find_files<CR>", { desc = "Find files" })    -- Find files
@@ -64,13 +66,13 @@ vim.keymap.set("n", "<leader>hls", "<cmd>set hlsearch!<CR>", { desc = "Toggle se
 
 -- Harpoon keymaps
 vim.keymap.set("n", "<leader>a", function() require("harpoon.mark").add_file() end,
-    { desc = "Add current file to Harpoon list" })                                                                                 -- Add current file to harpoon list
+    { desc = "Add current file to Harpoon list" })                                                                  -- Add current file to harpoon list
 vim.keymap.set("n", "<C-e>", function() require("harpoon.ui").toggle_quick_menu() end,
-    { desc = "Show list of marked files" })                                                                                        -- Show list of marked files
-vim.keymap.set("n", "<C-h>", function() require("ui").nav_file(1) end, { desc = "Navigate to first marked file" })                 -- Navigate to first marked file
-vim.keymap.set("n", "<C-t>", function() require("ui").nav_file(2) end, { desc = "Navigate to second marked file" })                -- Navigate to second marked file
-vim.keymap.set("n", "<C-n>", function() require("ui").nav_file(3) end, { desc = "Navigate to third marked file" })                 -- Navigate to third marked file
-vim.keymap.set("n", "<C-s>", function() require("ui").nav_file(4) end, { desc = "Navigate to fourth marked file" })                -- Navigate to fourth marked file
+    { desc = "Show list of marked files" })                                                                         -- Show list of marked files
+vim.keymap.set("n", "<C-h>", function() require("ui").nav_file(1) end, { desc = "Navigate to first marked file" })  -- Navigate to first marked file
+vim.keymap.set("n", "<C-t>", function() require("ui").nav_file(2) end, { desc = "Navigate to second marked file" }) -- Navigate to second marked file
+vim.keymap.set("n", "<C-n>", function() require("ui").nav_file(3) end, { desc = "Navigate to third marked file" })  -- Navigate to third marked file
+vim.keymap.set("n", "<C-s>", function() require("ui").nav_file(4) end, { desc = "Navigate to fourth marked file" }) -- Navigate to fourth marked file
 
 -- Telescope keymaps
 
@@ -147,26 +149,42 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Open Undotree
 --   ↓
 -- Zathura (auto-reload)
 vim.keymap.set("n", "<leader>mp", function()
-    vim.cmd("write") -- ensure file is saved
+    vim.cmd("write")
 
     local input = vim.fn.expand("%:p")
+    local html = vim.fn.expand("%:p:r") .. ".html"
     local output = vim.fn.expand("%:p:r") .. ".pdf"
 
     vim.fn.jobstart({
         "pandoc",
         input,
+        "--standalone",
+        "--lua-filter=" .. vim.fn.expand("~/.config/nvim/extra/obsidian-callouts.lua"),
+        "--css=" .. vim.fn.expand("~/.config/nvim/extra/callouts.css"),
+        "-t",
+        "html",
         "-o",
-        output,
-        "--pdf-engine=xelatex",
+        html,
     }, {
-        stdout_buffered = true,
-        stderr_buffered = true,
         on_exit = function(_, code)
-            if code == 0 then
-                vim.fn.jobstart({ "zathura", output }, { detach = true })
-            else
+            if code ~= 0 then
                 vim.notify("Pandoc build failed", vim.log.levels.ERROR)
+                return
             end
+
+            vim.fn.jobstart({
+                "weasyprint",
+                html,
+                output,
+            }, {
+                on_exit = function(_, code)
+                    if code == 0 then
+                        vim.fn.jobstart({ "zathura", output }, { detach = true })
+                    else
+                        vim.notify("PDF build failed", vim.log.levels.ERROR)
+                    end
+                end,
+            })
         end,
     })
 end, { desc = "Markdown preview" })

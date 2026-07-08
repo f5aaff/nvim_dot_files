@@ -1,14 +1,15 @@
 return {
 
-  {
-    "tpope/vim-fugitive",
-    cmd = { "Git", "G" },
-  },
+    {
+        "tpope/vim-fugitive",
+        lazy = false,
+        cmd = { "Git", "G" },
+    },
 
-  {
-    "lewis6991/gitsigns.nvim",
-    event = "BufReadPre",
-    config = true,
-  },
+    {
+        "lewis6991/gitsigns.nvim",
+        event = "BufReadPre",
+        config = true,
+    },
 
 }

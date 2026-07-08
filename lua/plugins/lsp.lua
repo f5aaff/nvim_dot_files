@@ -132,6 +132,13 @@ return {
             })
 
             vim.lsp.config("marksman", {
+                filetypes = { "markdown" },
+                capabilities = capabilities,
+                on_attach = on_attach,
+            })
+
+            vim.lsp.config("markdownlint", {
+                filetypes = { "markdown" },
                 capabilities = capabilities,
                 on_attach = on_attach,
             })
@@ -160,6 +167,7 @@ return {
             vim.lsp.enable("pyright")
             vim.lsp.enable("ruff")
             vim.lsp.enable("marksman")
+            vim.lsp.enable("markdownlint")
             vim.lsp.enable("ltex")
         end,
     },

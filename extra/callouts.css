@@ -1,0 +1,332 @@
+/* ==========================================================================
+   Page layout
+   ========================================================================== */
+
+@page {
+    size: A4;
+    margin: 2.5cm;
+
+    @bottom-center {
+        content: counter(page);
+        font-family: "Noto Sans";
+        font-size: 10pt;
+        color: #666;
+    }
+}
+
+/* ==========================================================================
+   Base document
+   ========================================================================== */
+
+body {
+    font-family: "Noto Sans";
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #222;
+
+    orphans: 3;
+    widows: 3;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+p {
+    margin-top: 0;
+    margin-bottom: 0.9em;
+}
+
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
+hr {
+    margin: 2em 0;
+}
+
+/* ==========================================================================
+   Headings
+   ========================================================================== */
+
+h1 {
+    font-size: 24pt;
+    margin-top: 0;
+    margin-bottom: 0.75em;
+
+    break-before: page;
+    break-after: avoid;
+}
+
+h2 {
+    font-size: 18pt;
+    margin-top: 1.8em;
+    margin-bottom: 0.5em;
+
+    break-after: avoid;
+}
+
+h3 {
+    font-size: 15pt;
+    margin-top: 1.4em;
+    margin-bottom: 0.4em;
+
+    break-after: avoid;
+}
+
+h4,
+h5,
+h6 {
+    break-after: avoid;
+}
+
+/* ==========================================================================
+   Lists
+   ========================================================================== */
+
+ul,
+ol {
+    margin: 0.8em 0;
+    padding-left: 1.6em;
+}
+
+li {
+    margin: 0.3em 0;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+a {
+    color: #1f5fbf;
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+
+    break-inside: avoid;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 0.5em;
+    text-align: left;
+}
+
+th {
+    background: #f3f3f3;
+}
+
+/* ==========================================================================
+   Images
+   ========================================================================== */
+
+img {
+    max-width: 100%;
+    height: auto;
+
+    break-inside: avoid;
+}
+
+/* ==========================================================================
+   Code
+   ========================================================================== */
+
+code {
+    font-family: "DejaVu Sans Mono", monospace;
+    font-size: 0.95em;
+}
+
+pre {
+    font-family: "DejaVu Sans Mono", monospace;
+
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    padding: 0.8em;
+
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+
+    break-inside: auto;
+}
+
+pre code {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* ==========================================================================
+   Blockquotes
+   ========================================================================== */
+
+blockquote {
+    margin: 1em 0;
+    padding-left: 1em;
+    border-left: 4px solid #bbb;
+
+    break-inside: avoid;
+}
+
+/* ==========================================================================
+   Page breaks
+   ========================================================================== */
+
+.page-break {
+    break-before: page;
+}
+
+/* ==========================================================================
+   Base callout
+   ========================================================================== */
+
+.callout {
+    margin: 1em 0;
+    border-left: 4px solid;
+    border-radius: 6px;
+    overflow: hidden;
+
+    break-inside: avoid;
+}
+
+.callout-title {
+    font-weight: 600;
+    padding: 0.6em 1em;
+
+    break-after: avoid;
+}
+
+.callout-title p {
+    margin: 0;
+}
+
+.callout-content {
+    padding: 0.8em 1em;
+}
+
+.callout-content>*:first-child {
+    margin-top: 0;
+}
+
+.callout-content>*:last-child {
+    margin-bottom: 0;
+}
+
+.callout-content ul,
+.callout-content ol {
+    margin: 0.5em 0;
+    padding-left: 1.5em;
+}
+
+.callout-content li {
+    margin: 0.25em 0;
+}
+
+.callout-content p {
+    margin: 0.5em 0;
+}
+
+/* ==========================================================================
+   INFO
+   ========================================================================== */
+
+.callout-info {
+    border-color: #2f80ed;
+    background: rgba(47, 128, 237, 0.08);
+}
+
+.callout-info .callout-title {
+    background: rgba(47, 128, 237, 0.15);
+}
+
+/* ==========================================================================
+   NOTE
+   ========================================================================== */
+
+.callout-note {
+    border-color: #7e57c2;
+    background: rgba(126, 87, 194, 0.08);
+}
+
+.callout-note .callout-title {
+    background: rgba(126, 87, 194, 0.15);
+}
+
+/* ==========================================================================
+   TIP
+   ========================================================================== */
+
+.callout-tip {
+    border-color: #00c853;
+    background: rgba(0, 200, 83, 0.08);
+}
+
+.callout-tip .callout-title {
+    background: rgba(0, 200, 83, 0.15);
+}
+
+/* ==========================================================================
+   SUCCESS
+   ========================================================================== */
+
+.callout-success {
+    border-color: #43a047;
+    background: rgba(67, 160, 71, 0.08);
+}
+
+.callout-success .callout-title {
+    background: rgba(67, 160, 71, 0.15);
+}
+
+/* ==========================================================================
+   WARNING
+   ========================================================================== */
+
+.callout-warning {
+    border-color: #ff9800;
+    background: rgba(255, 152, 0, 0.08);
+}
+
+.callout-warning .callout-title {
+    background: rgba(255, 152, 0, 0.15);
+}
+
+/* ==========================================================================
+   DANGER
+   ========================================================================== */
+
+.callout-danger {
+    border-color: #e53935;
+    background: rgba(229, 57, 53, 0.08);
+}
+
+.callout-danger .callout-title {
+    background: rgba(229, 57, 53, 0.15);
+}
+
+/* ==========================================================================
+   QUOTE
+   ========================================================================== */
+
+.callout-quote {
+    border-color: #757575;
+    background: rgba(117, 117, 117, 0.08);
+}
+
+.callout-quote .callout-title {
+    background: rgba(117, 117, 117, 0.15);
+}

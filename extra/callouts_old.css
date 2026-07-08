@@ -1,0 +1,151 @@
+body {
+  font-family: "Noto Sans";
+  font-size: 11pt;
+  line-height: 1.6;
+}
+
+/* Typography */
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+code {
+  font-family: "DejaVu Sans Mono", monospace;
+}
+
+pre {
+  background: #f5f5f5;
+  padding: 0.75em;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+pre code {
+  font-family: "DejaVu Sans Mono", monospace;
+}
+
+/* Base callout */
+
+.callout {
+  margin: 1em 0;
+  border-left: 4px solid;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.callout-title {
+  font-weight: 600;
+  padding: 0.6em 1em;
+}
+
+.callout-title p {
+  margin: 0;
+}
+
+.callout-content {
+  padding: 0.8em 1em;
+}
+
+.callout-content > *:first-child {
+  margin-top: 0;
+}
+
+.callout-content > *:last-child {
+  margin-bottom: 0;
+}
+
+.callout-content ul,
+.callout-content ol {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.callout-content li {
+  margin: 0.25em 0;
+}
+
+.callout-content p {
+  margin: 0.5em 0;
+}
+
+/* INFO */
+
+.callout-info {
+  border-color: #2f80ed;
+  background: rgba(47, 128, 237, 0.08);
+}
+
+.callout-info .callout-title {
+  background: rgba(47, 128, 237, 0.15);
+}
+
+/* NOTE */
+
+.callout-note {
+  border-color: #7e57c2;
+  background: rgba(126, 87, 194, 0.08);
+}
+
+.callout-note .callout-title {
+  background: rgba(126, 87, 194, 0.15);
+}
+
+/* TIP */
+
+.callout-tip {
+  border-color: #00c853;
+  background: rgba(0, 200, 83, 0.08);
+}
+
+.callout-tip .callout-title {
+  background: rgba(0, 200, 83, 0.15);
+}
+
+/* SUCCESS */
+
+.callout-success {
+  border-color: #43a047;
+  background: rgba(67, 160, 71, 0.08);
+}
+
+.callout-success .callout-title {
+  background: rgba(67, 160, 71, 0.15);
+}
+
+/* WARNING */
+
+.callout-warning {
+  border-color: #ff9800;
+  background: rgba(255, 152, 0, 0.08);
+}
+
+.callout-warning .callout-title {
+  background: rgba(255, 152, 0, 0.15);
+}
+
+/* DANGER */
+
+.callout-danger {
+  border-color: #e53935;
+  background: rgba(229, 57, 53, 0.08);
+}
+
+.callout-danger .callout-title {
+  background: rgba(229, 57, 53, 0.15);
+}
+
+/* QUOTE */
+
+.callout-quote {
+  border-color: #757575;
+  background: rgba(117, 117, 117, 0.08);
+}
+
+.callout-quote .callout-title {
+  background: rgba(117, 117, 117, 0.15);
+}
