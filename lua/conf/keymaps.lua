@@ -10,7 +10,7 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down with cursor cen
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up with cursor centered" })     -- Half page up with cursor centered
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result with cursor centered" })     -- Next search result with cursor centered
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result with cursor centered" }) -- Previous search result with cursor centered
-vim.keymap.set("n", "<leader>N", "<cmd>e $NOTES_HOME", { desc = "Open Notes Home" })        -- Open $NOTES_HOME
+vim.keymap.set("n", "<leader>N", "<cmd>e $NOTE_HOME<CR>", { desc = "Open Notes Home" })        -- Open $NOTE_HOME
 
 
 -- Paste without yanking

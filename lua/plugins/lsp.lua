@@ -1,186 +1,195 @@
 return {
 
-    -------------------------------------------------
-    -- LSP
-    -------------------------------------------------
+	-------------------------------------------------
+	-- LSP
+	-------------------------------------------------
 
-    {
-        "neovim/nvim-lspconfig",
-        lazy = false,
+	{
+		"neovim/nvim-lspconfig",
+		lazy = false,
 
-        dependencies = {
-            "hrsh7th/nvim-cmp",
-            "hrsh7th/cmp-nvim-lsp",
-        },
+		dependencies = {
+			"hrsh7th/nvim-cmp",
+			"hrsh7th/cmp-nvim-lsp",
+		},
 
-        config = function()
-            local cmp = require("cmp")
+		config = function()
+			local cmp = require("cmp")
 
-            cmp.setup({
-                mapping = {
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
+			cmp.setup({
+				mapping = {
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
 
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
 
-                    ["<S-CR>"] = cmp.mapping.confirm({ select = false }),
+					["<S-CR>"] = cmp.mapping.confirm({ select = false }),
 
-                    ["<C-Space>"] = cmp.mapping.complete(),
-                },
+					["<C-Space>"] = cmp.mapping.complete(),
+				},
 
-                sources = {
-                    { name = "nvim_lsp" },
-                },
-            })
-            -------------------------------------------------
-            -- capabilities
-            -------------------------------------------------
+				sources = {
+					{ name = "nvim_lsp" },
+				},
+			})
+			-------------------------------------------------
+			-- capabilities
+			-------------------------------------------------
 
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-            -------------------------------------------------
-            -- diagnostics
-            -------------------------------------------------
+			-------------------------------------------------
+			-- diagnostics
+			-------------------------------------------------
 
-            vim.diagnostic.config({
-                virtual_text = true,
-                signs = {
-                    text = {
-                        [vim.diagnostic.severity.ERROR] = "E",
-                        [vim.diagnostic.severity.WARN] = "W",
-                        [vim.diagnostic.severity.HINT] = "H",
-                        [vim.diagnostic.severity.INFO] = "I",
+			vim.diagnostic.config({
+				virtual_text = true,
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "E",
+						[vim.diagnostic.severity.WARN] = "W",
+						[vim.diagnostic.severity.HINT] = "H",
+						[vim.diagnostic.severity.INFO] = "I",
+					},
+				},
+			})
+
+			-------------------------------------------------
+			-- keymaps
+			-------------------------------------------------
+
+			local on_attach = function(client, bufnr)
+				local opts = { buffer = bufnr }
+
+				--if client.server_capabilities.semanticTokensProvider then
+				--  vim.lsp.semantic_tokens.start(bufnr, client.id)
+				--end
+
+				vim.keymap.set("n", "<leader>gws", vim.lsp.buf.workspace_symbol, opts)
+				vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
+				vim.keymap.set("n", "<leader>gca", vim.lsp.buf.code_action, opts)
+				vim.keymap.set("n", "<leader>grr", vim.lsp.buf.references, opts)
+				vim.keymap.set("n", "<leader>grn", vim.lsp.buf.rename, opts)
+
+				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+				vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+				vim.keymap.set("n", "<leader>D", vim.lsp.buf.declaration, opts)
+				vim.keymap.set("n", "<leader>ds", vim.lsp.buf.document_symbol, opts)
+				vim.keymap.set("n", "<leader>ws", vim.lsp.buf.workspace_symbol, opts)
+
+				if client.name == "ltex" then
+					require("ltex_extra").setup({
+						path = vim.fn.expand("~/.local/share/ltex"),
+					})
+				end
+				if client.name == "pyright" then
+					client.server_capabilities.documentFormattingProvider = false
+					client.server_capabilities.documentRangeFormattingProvider = false
+				end
+			end
+
+			-------------------------------------------------
+			-- servers
+			-------------------------------------------------
+
+			vim.lsp.config("lua_ls", {
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = { "vim" },
+						},
+					},
+				},
+			})
+
+			vim.lsp.config("gopls", {
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					gopls = {
+						semanticTokens = true,
+					},
+				},
+			})
+
+			vim.lsp.config("pyright", {
+				capabilities = capabilities,
+				on_attach = on_attach,
+			})
+
+			vim.lsp.config("ruff", {
+				capabilities = capabilities,
+				on_attach = on_attach,
+			})
+
+			vim.lsp.config("marksman", {
+				filetypes = { "markdown" },
+				capabilities = capabilities,
+				on_attach = on_attach,
+			})
+
+			vim.lsp.config("markdownlint", {
+				filetypes = { "markdown" },
+				capabilities = capabilities,
+				on_attach = on_attach,
+                init_options = {
+                    rules = {
+                        MD013 = false,
                     },
                 },
-            })
+			})
 
-            -------------------------------------------------
-            -- keymaps
-            -------------------------------------------------
+			vim.lsp.config("ltex", {
+				filetypes = { "markdown" },
+				on_attach = on_attach,
+				settings = {
+					ltex = {
+						language = "en-GB",
+						disabledRules = {
+							["en-GB"] = {
+								"OXFORD_SPELLING_Z_NOT_S",
+							},
+						},
+					},
+				},
+			})
 
-            local on_attach = function(client, bufnr)
-                local opts = { buffer = bufnr }
+			-------------------------------------------------
+			-- enable servers
+			-------------------------------------------------
 
-                --if client.server_capabilities.semanticTokensProvider then
-                --  vim.lsp.semantic_tokens.start(bufnr, client.id)
-                --end
+			vim.lsp.enable("lua_ls")
+			vim.lsp.enable("gopls")
+			vim.lsp.enable("pyright")
+			vim.lsp.enable("ruff")
+			vim.lsp.enable("marksman")
+			vim.lsp.enable("markdownlint")
+			vim.lsp.enable("ltex")
+		end,
+	},
+	vim.api.nvim_create_user_command("LspRestart", function()
+		for _, client in pairs(vim.lsp.get_clients()) do
+			client:stop()
+		end
+		vim.cmd("edit")
+	end, {}),
 
-                vim.keymap.set("n", "<leader>gws", vim.lsp.buf.workspace_symbol, opts)
-                vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
-                vim.keymap.set("n", "<leader>gca", vim.lsp.buf.code_action, opts)
-                vim.keymap.set("n", "<leader>grr", vim.lsp.buf.references, opts)
-                vim.keymap.set("n", "<leader>grn", vim.lsp.buf.rename, opts)
-
-                vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-                vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
-                vim.keymap.set("n", "<leader>D", vim.lsp.buf.declaration, opts)
-                vim.keymap.set("n", "<leader>ds", vim.lsp.buf.document_symbol, opts)
-                vim.keymap.set("n", "<leader>ws", vim.lsp.buf.workspace_symbol, opts)
-
-
-                if client.name == "pyright" then
-                    client.server_capabilities.documentFormattingProvider = false
-                    client.server_capabilities.documentRangeFormattingProvider = false
-                end
-            end
-
-            -------------------------------------------------
-            -- servers
-            -------------------------------------------------
-
-            vim.lsp.config("lua_ls", {
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { "vim" },
-                        },
-                    },
-                },
-            })
-
-            vim.lsp.config("gopls", {
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    gopls = {
-                        semanticTokens = true,
-                    },
-                },
-            })
-
-            vim.lsp.config("pyright", {
-                capabilities = capabilities,
-                on_attach = on_attach,
-            })
-
-            vim.lsp.config("ruff", {
-                capabilities = capabilities,
-                on_attach = on_attach,
-            })
-
-            vim.lsp.config("marksman", {
-                filetypes = { "markdown" },
-                capabilities = capabilities,
-                on_attach = on_attach,
-            })
-
-            vim.lsp.config("markdownlint", {
-                filetypes = { "markdown" },
-                capabilities = capabilities,
-                on_attach = on_attach,
-            })
-
-            vim.lsp.config("ltex", {
-                filetypes = { "markdown" },
-                on_attach = on_attach,
-                settings = {
-                    ltex = {
-                        language = "en-GB",
-                        disabledRules = {
-                            ["en-GB"] = {
-                                "OXFORD_SPELLING_Z_NOT_S",
-                            },
-                        },
-                    },
-                },
-            })
-
-            -------------------------------------------------
-            -- enable servers
-            -------------------------------------------------
-
-            vim.lsp.enable("lua_ls")
-            vim.lsp.enable("gopls")
-            vim.lsp.enable("pyright")
-            vim.lsp.enable("ruff")
-            vim.lsp.enable("marksman")
-            vim.lsp.enable("markdownlint")
-            vim.lsp.enable("ltex")
-        end,
-    },
-    vim.api.nvim_create_user_command("LspRestart", function()
-        for _, client in pairs(vim.lsp.get_clients()) do
-            client:stop()
-        end
-        vim.cmd("edit")
-    end, {}),
-
-    vim.api.nvim_create_user_command("LspStop", function()
-        for _, client in pairs(vim.lsp.get_clients()) do
-            client:stop()
-        end
-    end, {}),
+	vim.api.nvim_create_user_command("LspStop", function()
+		for _, client in pairs(vim.lsp.get_clients()) do
+			client:stop()
+		end
+	end, {}),
 }

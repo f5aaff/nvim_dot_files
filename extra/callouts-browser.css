@@ -1,0 +1,208 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 0 1em;
+    line-height: 1.6;
+    color: #c9d1d9;
+    background: #0d1117;
+}
+
+a {
+    color: #58a6ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.3;
+    color: #e6edf3;
+}
+
+h1 { font-size: 2em; border-bottom: 1px solid #30363d; padding-bottom: 0.3em; }
+h2 { font-size: 1.5em; border-bottom: 1px solid #30363d; padding-bottom: 0.3em; }
+h3 { font-size: 1.25em; }
+
+p { margin: 0 0 1em; }
+
+ul, ol {
+    margin: 0 0 1em;
+    padding-left: 2em;
+}
+
+li { margin: 0.25em 0; }
+
+code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    background: #161b22;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: #e6edf3;
+}
+
+pre {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.85em;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 1em;
+    overflow-x: auto;
+    margin: 0 0 1em;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    color: #e6edf3;
+}
+
+blockquote {
+    margin: 0 0 1em;
+    padding: 0.5em 1em;
+    border-left: 4px solid #30363d;
+    color: #8b949e;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 0 1em;
+}
+
+th, td {
+    border: 1px solid #30363d;
+    padding: 6px 13px;
+    text-align: left;
+}
+
+th {
+    background: #161b22;
+    font-weight: 600;
+    color: #e6edf3;
+}
+
+td {
+    color: #c9d1d9;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+}
+
+/* ==========================================================================
+   Callouts (Obsidian-style)
+   ========================================================================== */
+
+.callout {
+    margin: 1em 0;
+    border-left: 4px solid;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.callout-title {
+    font-weight: 600;
+    padding: 0.6em 1em;
+    color: #e6edf3;
+}
+
+.callout-title p {
+    margin: 0;
+    font-size: 0.95em;
+}
+
+.callout-content {
+    padding: 0.8em 1em;
+}
+
+.callout-content>*:first-child {
+    margin-top: 0;
+}
+
+.callout-content>*:last-child {
+    margin-bottom: 0;
+}
+
+.callout-content ul,
+.callout-content ol {
+    margin: 0.5em 0;
+    padding-left: 1.5em;
+}
+
+.callout-content p {
+    margin: 0.5em 0;
+}
+
+/* INFO */
+.callout-info {
+    border-color: #2f80ed;
+    background: rgba(47, 128, 237, 0.12);
+}
+.callout-info .callout-title {
+    background: rgba(47, 128, 237, 0.2);
+}
+
+/* NOTE */
+.callout-note {
+    border-color: #a371f7;
+    background: rgba(163, 113, 247, 0.12);
+}
+.callout-note .callout-title {
+    background: rgba(163, 113, 247, 0.2);
+}
+
+/* TIP */
+.callout-tip {
+    border-color: #3fb950;
+    background: rgba(63, 185, 80, 0.12);
+}
+.callout-tip .callout-title {
+    background: rgba(63, 185, 80, 0.2);
+}
+
+/* SUCCESS */
+.callout-success {
+    border-color: #3fb950;
+    background: rgba(63, 185, 80, 0.12);
+}
+.callout-success .callout-title {
+    background: rgba(63, 185, 80, 0.2);
+}
+
+/* WARNING */
+.callout-warning {
+    border-color: #d29922;
+    background: rgba(210, 153, 34, 0.12);
+}
+.callout-warning .callout-title {
+    background: rgba(210, 153, 34, 0.2);
+}
+
+/* DANGER */
+.callout-danger {
+    border-color: #f85149;
+    background: rgba(248, 81, 73, 0.12);
+}
+.callout-danger .callout-title {
+    background: rgba(248, 81, 73, 0.2);
+}
+
+/* QUOTE */
+.callout-quote {
+    border-color: #8b949e;
+    background: rgba(139, 148, 158, 0.12);
+}
+.callout-quote .callout-title {
+    background: rgba(139, 148, 158, 0.2);
+}
