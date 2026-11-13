@@ -1,36 +1,34 @@
 return {
+    "theprimeagen/harpoon",
+    branch = "harpoon2",
+    lazy = false,
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    config = function()
+        local harpoon = require("harpoon")
+        harpoon:setup({})
 
-	{ "theprimeagen/harpoon", branch = "harpoon2" },
+        -- basic telescope configuration
+        local conf = require("telescope.config").values
+        local function toggle_telescope(harpoon_files)
+            local file_paths = {}
+            for _, item in ipairs(harpoon_files.items) do
+                table.insert(file_paths, item.value)
+            end
 
-	{
-		"ThePrimeagen/refactoring.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		keys = {
-			{
-				"<leader>ri",
-				function()
-					require("refactoring").select_refactor()
-				end,
-				mode = "v",
-			},
-		},
-		config = function()
-			require("refactoring").setup({})
-		end,
-	},
+            require("telescope.pickers").new({}, {
+                prompt_title = "Harpoon",
+                finder = require("telescope.finders").new_table({
+                    results = file_paths,
+                }),
+                previewer = conf.file_previewer({}),
+                sorter = conf.generic_sorter({}),
+            }):find()
+        end
 
--- not as good as neotree!
---	{
---		"nvim-tree/nvim-tree.lua",
---		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
---		dependencies = { "nvim-tree/nvim-web-devicons" },
---
---		config = function()
---			require("nvim-tree").setup()
---			vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
---		end,
---	},
-
+        -- Keymap for the telescope picker
+        vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
+            { desc = "Open harpoon window" })
+    end,
 }

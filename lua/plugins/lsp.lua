@@ -115,6 +115,11 @@ return {
 				},
 			})
 
+			vim.lsp.config("shellcheck", {
+				capabilities = capabilities,
+				on_attach = on_attach,
+			})
+
 			vim.lsp.config("gopls", {
 				capabilities = capabilities,
 				on_attach = on_attach,

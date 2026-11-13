@@ -10,7 +10,7 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down with cursor cen
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up with cursor centered" })     -- Half page up with cursor centered
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result with cursor centered" })     -- Next search result with cursor centered
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result with cursor centered" }) -- Previous search result with cursor centered
-vim.keymap.set("n", "<leader>N", "<cmd>e $NOTE_HOME<CR>", { desc = "Open Notes Home" })        -- Open $NOTE_HOME
+vim.keymap.set("n", "<leader>N", "<cmd>e $NOTE_HOME<CR>", { desc = "Open Notes Home" })     -- Open $NOTE_HOME
 
 
 -- Paste without yanking
@@ -65,14 +65,17 @@ vim.keymap.set("n", "<leader>gt", '<cmd>tabnew<CR>', { desc = "Open new tab" }) 
 vim.keymap.set("n", "<leader>hls", "<cmd>set hlsearch!<CR>", { desc = "Toggle search highlighting" }) -- Toggle search highlighting
 
 -- Harpoon keymaps
-vim.keymap.set("n", "<leader>a", function() require("harpoon.mark").add_file() end,
-    { desc = "Add current file to Harpoon list" })                                                                  -- Add current file to harpoon list
-vim.keymap.set("n", "<C-e>", function() require("harpoon.ui").toggle_quick_menu() end,
-    { desc = "Show list of marked files" })                                                                         -- Show list of marked files
-vim.keymap.set("n", "<C-h>", function() require("ui").nav_file(1) end, { desc = "Navigate to first marked file" })  -- Navigate to first marked file
-vim.keymap.set("n", "<C-t>", function() require("ui").nav_file(2) end, { desc = "Navigate to second marked file" }) -- Navigate to second marked file
-vim.keymap.set("n", "<C-n>", function() require("ui").nav_file(3) end, { desc = "Navigate to third marked file" })  -- Navigate to third marked file
-vim.keymap.set("n", "<C-s>", function() require("ui").nav_file(4) end, { desc = "Navigate to fourth marked file" }) -- Navigate to fourth marked file
+vim.keymap.set("n", "<leader>a", function() local harpoon = require("harpoon") harpoon:list():add() end, { desc = "Add current file to Harpoon list" })                                                                  -- Add current file to harpoon list
+
+-- Standard quick menu - prefer telescope opt. found in navigation.lua
+vim.keymap.set("n", "<C-S-E>", function() local harpoon = require("harpoon") harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Show list of marked files" })                                                                         -- Show list of marked files
+vim.keymap.set("n", "<C-h>", function() local harpoon = require("harpoon") harpoon:list():select(1) end, { desc = "Navigate to first marked file" })  -- Navigate to first marked file
+vim.keymap.set("n", "<C-t>", function() local harpoon = require("harpoon") harpoon:list():select(2) end, { desc = "Navigate to second marked file" }) -- Navigate to second marked file
+vim.keymap.set("n", "<C-n>", function() local harpoon = require("harpoon") harpoon:list():select(3) end, { desc = "Navigate to third marked file" })  -- Navigate to third marked file
+vim.keymap.set("n", "<C-s>", function() local harpoon = require("harpoon") harpoon:list():select(4) end, { desc = "Navigate to fourth marked file" }) -- Navigate to fourth marked file
+
+vim.keymap.set("n", "<C-S-P>", function() local harpoon = require("harpoon") harpoon:list():prev() end, { desc = "Previous harpoon file" })
+vim.keymap.set("n", "<C-S-N>", function() local harpoon = require("harpoon") harpoon:list():next() end, { desc = "Next harpoon file" })
 
 -- Telescope keymaps
 
